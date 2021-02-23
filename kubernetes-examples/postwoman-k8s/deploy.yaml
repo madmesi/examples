@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: postwoman
+  name: postwoman
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postwoman
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: postwoman
+    spec:
+      containers:
+      - name: postwoman
+        image: liyasthomas/postwoman 
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 3000
+      restartPolicy: Always
