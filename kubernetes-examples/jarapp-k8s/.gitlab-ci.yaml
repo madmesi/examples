@@ -1,0 +1,54 @@
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: tcp://localhost:2375
+
+stages:
+  - build
+  - dockerize
+  - deploy
+  
+mvn-build:
+  image: maven
+  stage: build
+  script:
+    - export MAVEN_CONFIG=''
+    - ./mvnw clean install
+  only:
+    - master
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - target/*.jar
+
+dockerize:
+  image: docker:18.09
+  stage: dockerize
+  dependencies:
+    - mvn-build
+  services:
+    - docker:18.09-dind
+
+  script:
+    - VERSION=$(ls target | grep -E 'PROJECT_NAME.*?\.jar$' | sed -E 's/^PROJECT_NAME-(.*)\.jar$/\1/')
+    - docker build -t registry.example.com/ario:latest .
+    - docker login -u admin -p REGISTRY_PASSWORD registry.example.com
+    - docker push registry.example.com/ario:latest
+    - docker build -t registry.example.com/ario:$VERSION .
+    - docker push registry.example.com/ario:$VERSION
+  only:
+    - master
+    
+rollout:
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  stage: deploy
+  script:
+    - base64 -d admin-rbac > .config
+    - USER_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    - kubectl rollout restart deployment <deploy_name>  --kubeconfig .config --namespace <namespace_name>
+  only:
+    - master
+    
+    

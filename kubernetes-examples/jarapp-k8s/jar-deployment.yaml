@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: Myapp
+  name: Myapp
+  namespace: Mynamespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ario
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: Myapp
+    spec:
+      containers:
+      - name: Myapp
+        image: myregistry.example.com/myimage:tag
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+        env:
+          - name: MONGO_DB_HOST
+            value: "mongodb"
+          - name: MONGO_DB_PORT
+            value: "27017"
+          - name: REDIS_HOST
+            value: "redis"
+          - name: REDIS_URL
+            value: "redis"
+          - name: REDIS_PORT
+            value: "6379"
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: Mysaname
