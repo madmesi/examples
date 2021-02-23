@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    name: gitlab-redis
+  name: gitlab-redis
+  namespace: gitlab
+spec:
+  ports:
+  - name: redis
+    port: 6379
+    protocol: TCP
+    targetPort: redis
+  selector:
+    name: gitlab-redis
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

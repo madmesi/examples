@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: mynamespace
+spec:
+  selector:
+    matchLabels:
+      role: mongo
+      environment: test
+  serviceName: "mongodb"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        role: mongo
+        environment: test
+    spec:
+      terminationGracePeriodSeconds: 10
+      serviceAccountName: newario-operator
+      containers:
+        - name: mongodb
+          image: mongo
+          volumeMounts:
+          - name: mongo-persistent
+            mountPath: /data/db
+          command:
+            - mongod
+            - "--replSet"
+            - "rsSwitchIT"
+            - "--bind_ip"
+            - "0.0.0.0"
+          ports:
+          - name: mongodb
+            containerPort: 27017
+
+        - name: mongo-sidecar
+          image: cvallance/mongo-k8s-sidecar
+          env:
+          - name: MONGO_SIDECAR_POD_LABELS
+            value: "role=mongo,environment=test"
+   
+          - name: KUBERNETES_MONGO_SERVICE_NAME
+            value: "mongodb"
+
+          - name: KUBE_NAMESPACE
+            value: newario
+
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-persistent
+    spec:
+#      storageClassName: manual
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi

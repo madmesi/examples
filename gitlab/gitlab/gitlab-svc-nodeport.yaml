@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    name: gitlab
+  name: gitlab-svc
+  namespace: gitlab
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: ssh
+    port: 22
+    protocol: TCP
+    targetPort: ssh
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    name: gitlab
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

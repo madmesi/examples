@@ -1,0 +1,32 @@
+# concurrent: limits how many jobs globally can be run concurrently. The most upper limit of jobs using all defined runners. 0 does not mean unlimited. I set it to 5 concurrent.
+concurrent = 5
+check_interval = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = "gitlab-runner-gitlab-runner-6c978d4468-28frm"
+  request_concurrency = 5
+  url = "https://git.example.com/"
+  token = "MYAWESOMETOKEN"
+  environment = ["DOCKER_AUTH_CONFIG={\"auths\":{\"registry.example.com\":{\"auth\":\"MYAWESOMEBASE64PASSWORD=\"}}}"]
+  executor = "kubernetes"
+  [runners.custom_build_dir]
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
+    [runners.cache.azure]
+  [runners.kubernetes]
+    host = ""
+    bearer_token_overwrite_allowed = true
+    image = "registry.example.com/runner-alpine:v13.6.0"
+    image_pull_secrets = ["regcred"]
+    namespace = "mynamespace"
+    namespace_overwrite_allowed = ""
+    privileged = true
+    service_account_overwrite_allowed = ""
+    pod_annotations_overwrite_allowed = ""
+    [runners.kubernetes.affinity]
+    [runners.kubernetes.pod_security_context]
+    [runners.kubernetes.volumes]

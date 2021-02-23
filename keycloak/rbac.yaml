@@ -1,0 +1,72 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: keycloak
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: keycloak-operator
+  namespace: keycloak
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: keycloak-role
+  namespace: keycloak
+rules:
+- apiGroups: [""]
+  resources: ["pods","services"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get","list","watch"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+- apiGroups: [""]
+  resources: ["persistentvolumeclaims"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: keycloak-binding
+  namespace: keycloak
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: keycloak-role
+subjects:
+- kind: ServiceAccount
+  name: keycloak-operator
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: keycloak-clusterrole
+rules:
+- apiGroups: [""]
+  resources: ["persistentvolumes"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: keycloak-clusterrolebinding
+subjects:
+- kind: ServiceAccount
+  namespace: keycloak
+  name: keycloak-operator
+roleRef:
+  kind: ClusterRole
+  name: keycloak-clusterrole
+  apiGroup: rbac.authorization.k8s.io

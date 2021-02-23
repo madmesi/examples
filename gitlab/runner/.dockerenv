@@ -1,0 +1,10 @@
+# go to the root path of the gitlab runner (execute with bash or whatever) , and see it the ".dockerenv" file exists. if not create it:
+{
+        "auths": {
+                "registry.example.com": {
+                        "auth": "MYAWESOMETOKENHASHEDMTIzNDU2"
+                },
+                "registry.example.com/v2": {
+                }
+     }
+ }

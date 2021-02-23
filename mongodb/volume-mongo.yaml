@@ -1,0 +1,47 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mongo-persistent-0
+  namespace: mynamespace
+  labels:
+    type: local
+    app: mongodb
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/mongo/0"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mongo-persistent-1
+  namespace: mynamespace
+  labels:
+    type: local
+    app: mongodb
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/mongo/1"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mongo-persistent-2
+  namespace: mynamespace
+  labels:
+    type: local
+    app: mongodb
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/mongo/2"
