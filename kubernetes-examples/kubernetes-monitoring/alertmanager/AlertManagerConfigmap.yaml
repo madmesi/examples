@@ -1,0 +1,20 @@
+## Sending Alerts to RocketChat ##
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+data:
+  config.yml: |-
+    global:
+      resolve_timeout: 5m
+    route:
+      repeat_interval: 5m
+      group_interval: 3m
+      receiver: 'rocketchat'
+ 
+    receivers:
+    - name: 'rocketchat'
+      webhook_configs:
+          - send_resolved: true
+            url: 'https://Your-rocketchat-address.ORG/hooks/'
