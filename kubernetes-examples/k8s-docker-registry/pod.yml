@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-registry
+  labels:
+    name: docker-registry
+spec:
+  volumes:
+    - name: config
+      configMap:
+        name: docker-registry
+        items:
+          - key: registry-config.yml
+            path: config.yml
+    - name: htpasswd
+      secret:
+        secretName: docker-registry
+        items:
+        - key: HTPASSWD
+          path: htpasswd
+    - name: storage
+      #emptyDir: {}
+      persistentVolumeClaim:
+        claimName: registry-claim
+  containers:
+    - name: docker-registry
+      image: registry:2.6.2
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: http
+          containerPort: 5000
+          protocol: TCP
+      volumeMounts:
+        - name: config
+          mountPath: /etc/docker/registry
+#          readOnly: true
+        - name: htpasswd
+          mountPath: /auth
+          readOnly: true
+        - name: storage
+          mountPath: /var/lib/registry

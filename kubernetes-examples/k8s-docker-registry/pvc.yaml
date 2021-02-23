@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-claim
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 40Gi
+  storageClassName: local-path
+  volumeMode: Filesystem
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: htpasswd-claim
+#  namespace: default
+#spec:
+#  accessModes:
+#  - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 1Gi
+#  storageClassName: local-path
+#  volumeMode: Filesystem
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: config-claim
+#  namespace: default
+#spec:
+#  accessModes:
+#  - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 1Gi
+#  storageClassName: local-path
+#  volumeMode: Filesystem
