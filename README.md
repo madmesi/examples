@@ -40,3 +40,12 @@ The CMD instruction defines the default command to run when the Docker Container
 EXPOSE 3000
 CMD ["/src/src/bin/src"]
 ```
+# Build
+With the Dockerfile created, you can use the Docker CLI to build the image.
+
+When creating the image we also define a friendly name and tag. The name should refer to the application, in this case kotlin-app. The tag is a string and commonly used as a version number, in this case it's v0.1.
+
+```
+docker build -t myimagev0.1 .
+```
+NB: the last dot "." indicates the here exists the Dockerfile.
