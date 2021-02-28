@@ -28,3 +28,15 @@ FROM nginx:alpine
 COPY . /src
 RUN apk add vim zip unzip 
 ```
+
+# Application
+Once the Dockerfile has the required dependencies it now needs to define how to build and run your application.
+
+The EXPOSE instruction is a description about what ports the application is listening on. This helps describe how the application should be started and run in production. This can be considered part of the documentation, or metadata, about the image and application.
+
+The CMD instruction defines the default command to run when the Docker Container is started. This can be overridden when starting the container.
+
+```
+EXPOSE 3000
+CMD ["/src/src/bin/src"]
+```
