@@ -53,10 +53,13 @@ NB: the last dot "." indicates the here exists the Dockerfile.
 
 # Run
 Once the Docker Image has been built you can be launch it in the same way as other Docker Images.
+
+```
 docker run -d \
   -t -p 80:80 \
   --name app \
   myimage:v0.1
+```
 
 Once the container and process has started you can use curl to access the running application.
 
@@ -64,4 +67,4 @@ You can view the application logs using docker logs app
 
 curl http://localhost:80
 
-You've now successfully built a Kotlin application as a Docker Image.
+You've now successfully built an application as a Docker Image.
