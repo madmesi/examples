@@ -1,0 +1,16 @@
+---
+version: "3"
+services:
+
+  haproxy:
+    image: haproxytech/haproxy-ubuntu:2.2
+#    image: haproxy:2.3
+    volumes:
+    - "./haproxy.cfg:/etc/haproxy/haproxy.cfg"
+#    - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+    - "./cors.lua:/etc/haproxy/cors.lua"
+#    - "./cors.lua:/usr/local/etc/haproxy/cors.lua"
+    ports:
+    - "80:80"
+    - "1080:1080"
+    - "9000:9000"
