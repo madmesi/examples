@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: ~
+  labels:
+    app: redmine
+  name: redmine
+  namespace: redmine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redmine
+  strategy: {}
+  template:
+    metadata:
+      annotations: ~
+      labels:
+        app: redmine
+    spec:
+      containers:
+      - env:
+        - name: REDMINE_DB_MYSQL
+          value: db
+        - name: REDMINE_DB_PASSWORD
+          value: MYAWESOMEPASSWORD
+        - name: REDMINE_SECRET_KEY_BASE
+          value: supersecretkey
+        image: redmine
+        imagePullPolicy: Always
+        name: redmine
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+      imagePullSecrets:
+      - name: regcred
+      restartPolicy: Always
+      serviceAccountName: redmine-operator
