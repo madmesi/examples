@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: ~
+  labels:
+    app: db
+  name: db
+  namespace: redmine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  strategy: {}
+  template:
+    metadata:
+      annotations: ~
+      labels:
+        app: db
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: redmine
+        - name: MYSQL_ROOT_PASSWORD
+          value: MYAWESOMEPASSWORD
+        image: mysql:5.7
+        imagePullPolicy: IfNotPresent
+        name: db
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
+        resources: {}
+      imagePullSecrets:
+      - name: regcred
+      restartPolicy: Always
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: mysql-claim
+      serviceAccountName: redmine-operator
