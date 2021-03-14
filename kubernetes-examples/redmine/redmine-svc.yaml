@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: redmine
+  name: redmine
+  namespace: redmine
+spec:
+  ports:
+  - name: redmine
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: redmine
+  type: NodePort
