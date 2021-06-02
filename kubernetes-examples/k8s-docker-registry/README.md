@@ -130,7 +130,7 @@ metadata:
     nginx.org/client-max-body-size: "0"
 spec:
   rules:
-  - host: registry.vaslapp.com
+  - host: registry.example.com
     http:
       paths:
       - path: /
