@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: redis
+  name: redis
+  namespace: mynamespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: Asia/Tehran
+        image: redis
+        imagePullPolicy: ""
+        name: redis
+        ports:
+        - containerPort: 6379
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: my-operator
+      volumes: null
