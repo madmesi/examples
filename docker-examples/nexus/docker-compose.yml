@@ -1,13 +1,14 @@
+# docker-compose.yml
 version: "3"
 services:
   nexus:
     image: sonatype/nexus3
     restart: always
     volumes:
-      - "nexus-data:/sonatype-work"
+      - ./nexus-data:/nexus-data
+        #      - ./nexus-data-work:/sonatype-work
     ports:
       - "8081:8081"
-
-volumes:
-  nexus-data: {}
-
+      - "8082:8082"
+      - "8083:8083"
+      - "8084:8084"
