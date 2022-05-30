@@ -17,7 +17,7 @@ services:
       - "9092:9092"
     environment:
             #      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://172.31.52.226:9092"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://192.168.10.8:9092"
       # Required. Instructs Kafka how to get in touch with ZooKeeper.
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
       # Required when running in a single-node cluster, as we are. We would be able to take the default if we had
