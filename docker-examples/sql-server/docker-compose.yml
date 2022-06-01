@@ -1,0 +1,23 @@
+version: "3.2"
+services:
+
+  sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    expose:
+      - "1433"
+    environment:
+      SA_PASSWORD: "YOUR-SUPER-STRONG-PASSWORD"
+      ACCEPT_EULA: "Y"
+
+    volumes:
+      - sqlsystem:/var/opt/mssql/
+      - sqldata:/var/opt/sqlserver/data
+      - sqllog:/var/opt/sqlserver/log
+      - sqlbackup:/var/opt/sqlserver/backup
+
+volumes:
+  sqlsystem:
+  sqldata:
+  sqllog:
+  sqlbackup:
