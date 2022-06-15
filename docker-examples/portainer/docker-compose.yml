@@ -13,7 +13,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./portainer-data:/data
     ports:
+# http port is running on port 9000, 9001 is your host port, that you are trying to map.
       - 127.0.0.1:9101:9000
+# https port for portainer, if you are trying to run portainer behind a reverse proxy, it's a best practice to use 9443      
+      - 127.0.0.1:9443:9443
       - 127.0.0.1:8000:8000
- # source: https://nextgentips.com/2022/01/26/how-to-install-portainer-ce-with-docker-compose/     
- # source: https://docs.fuga.cloud/how-to-install-portainer-docker-ui-manager-on-ubuntu-20.04-18.04-16.04
+# source: https://nextgentips.com/2022/01/26/how-to-install-portainer-ce-with-docker-compose/     
+# source: https://docs.fuga.cloud/how-to-install-portainer-docker-ui-manager-on-ubuntu-20.04-18.04-16.04
