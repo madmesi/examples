@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    pull_policy: never
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./portainer-data:/data
+    ports:
+      - 127.0.0.1:9100:9000
+      - 127.0.0.1:8000:8000
+ # source: https://nextgentips.com/2022/01/26/how-to-install-portainer-ce-with-docker-compose/     
+ # source: https://docs.fuga.cloud/how-to-install-portainer-docker-ui-manager-on-ubuntu-20.04-18.04-16.04
