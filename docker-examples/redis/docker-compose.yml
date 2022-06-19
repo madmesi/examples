@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  redis-test:
+    image: redis:6.2-alpine
+    restart: always
+    container_name: redis-test
+    ports:
+      - '6380:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass YOURSUPERSECUREPASSWORD
+    volumes:
+      - ./cache:/data
+
+networks:
+  default:
+    external:
+      name: develop
