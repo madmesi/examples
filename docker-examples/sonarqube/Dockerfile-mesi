@@ -1,0 +1,8 @@
+FROM sonarsource/sonar-scanner-cli:latest
+COPY . .
+RUN sonar-scanner \
+  -Dsonar.projectKey=MYPTOJECTKEY \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=https://sonar.example.com \
+  -Dsonar.login=WDEFRGTYHN$%%3456789097867545678908978675 \
+  -D:sonar.qualitygate.wait=true
