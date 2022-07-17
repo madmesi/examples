@@ -1,0 +1,21 @@
+trigger:
+- master
+
+resources:
+- repo: self
+
+pool:
+  name: OwnPool
+
+steps:
+- task: CmdLine@2
+  inputs:
+    script: 
+      bash $(System.DefaultWorkingDirectory)/file.sh
+    failOnStderr: true
+- task: CmdLine@2
+  inputs:
+    script: |
+      docker build -t sonarscanner-myproject:latest -f Dockerfile-mesi .
+      docker rmi sonarscanner-myproject:latest
+    failOnStderr: true
