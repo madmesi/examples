@@ -9,5 +9,5 @@ Following are the general steps to build this application
 ## Consider using appsetting.example.json file
 When in develop environment you can use this config inside you Dockefile, this scenario is most helpful when you have multiple appsetting config files and this prevents confusion. 
 - specify the environment in Dockerfile
-ENV ASPNETCORE_ENVIRONMENT develop
-<!--- the above line uses appsettings.develop.json file --->
+`ENV ASPNETCORE_ENVIRONMENT develop`
+`<!--- the above line uses appsettings.develop.json file --->`
