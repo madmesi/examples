@@ -58,7 +58,7 @@ when you run docker-compose config, it reads the docker-compose.yml in the curre
 
 - another command is 
 
-`docker-compose pause 
+`docker-compose pause `
 
 
 - `docker-compose up -d` 
