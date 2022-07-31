@@ -82,3 +82,13 @@ Basic operations:
 - `docker-compose start`
 - `docker-compose stop`
 - `docker-compose down` <-- this is destructive command, it stops the containers, and removes them.
+
+
+# Play Safe?
+I'm on the production servers right now and we can't tolerate downtime, What I'm going to do in this scenario where having maximum uptime is the goal and stressful?
+do this process first in your development process and after successfuly testing it afew times, you can take to production. It's a good idea to consider using this in your pipeline.
+
+`docker-compose -f docker-compose-develop.yml build`
+`docker-compose -f docker-compose-develop.yml stop`
+`docker-compose -f docker-compose-develop.yml up -d`
+`docker-compose -f docker-compose-develop.yml ps`
