@@ -63,3 +63,7 @@ when you run docker-compose config, it reads the docker-compose.yml in the curre
 
 - `docker-compose up -d` 
 launches the containers for all applications defined inside the service section. It does that in the detached mode provided using option `-d`, which is similar to the docker run option. Try running `docker-compose up` without this option to see what happens.
+
+
+- `docker-compose logs myapp-develop`
+will show the logs form the container created for 'myapp-develop' service. If you do not provide the name of the service, consolidated log for all services will be shows.
