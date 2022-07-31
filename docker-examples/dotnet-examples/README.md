@@ -85,7 +85,7 @@ Basic operations:
 
 
 # Play Safe?
-I'm on the production servers right now and we can't tolerate downtime, What I'm going to do in this scenario where having maximum uptime is the goal and stressful?
+I'm on the production servers right now and we can't tolerate downtime, What I'm going to do in this scenario where having maximum uptime is the goal and stressful,
 do this process first in your development process and after successfuly testing it afew times, you can take to production. It's a good idea to consider using this in your pipeline.
 
 `docker-compose -f docker-compose-develop.yml build`
