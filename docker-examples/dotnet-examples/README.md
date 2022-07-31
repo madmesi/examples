@@ -11,4 +11,5 @@ When in develop environment you can use this config inside you Dockefile, this s
 - specify the environment in Dockerfile
 
 `ENV ASPNETCORE_ENVIRONMENT develop`
+
 `<!--- the above line uses appsettings.develop.json file --->`
