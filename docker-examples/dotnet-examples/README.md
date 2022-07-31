@@ -67,3 +67,13 @@ launches the containers for all applications defined inside the service section.
 
 - `docker-compose logs myapp-develop`
 will show the logs form the container created for 'myapp-develop' service. If you do not provide the name of the service, consolidated log for all services will be shows.
+
+
+- Pause a container , not stopping it, with the option `docker-compose pause`
+You will take away the CPU from it and it will be frozen. 
+How to unpase? `docker-compose unpause`
+
+
+- Another option is when you need to pull the images ( not in this case where you're building the Dockerfile, in a case where the Dockerimage option is specified.) before running the containers, you can use the `pull` option.
+
+`docker-compose pull`
