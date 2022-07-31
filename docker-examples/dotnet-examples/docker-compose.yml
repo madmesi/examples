@@ -1,0 +1,14 @@
+ version: '3.3'
+
+services:
+  myapp-develop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    container_name: "myapp-develop"
+
+networks:
+  default:
+    external:
+      name: develop
