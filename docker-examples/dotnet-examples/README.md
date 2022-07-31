@@ -89,6 +89,9 @@ I'm on the production servers right now and we can't tolerate downtime, What I'm
 do this process first in your development process and after successfuly testing it afew times, you can take to production. It's a good idea to consider using this in your pipeline.
 
 `docker-compose -f docker-compose-develop.yml build`
+
 `docker-compose -f docker-compose-develop.yml stop`
+
 `docker-compose -f docker-compose-develop.yml up -d`
+
 `docker-compose -f docker-compose-develop.yml ps`
