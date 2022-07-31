@@ -14,3 +14,16 @@ When in develop environment you can use this config inside you Dockefile, this s
 `ENV ASPNETCORE_ENVIRONMENT develop`
 
 `<!--- the above line uses appsettings.develop.json file --->`
+
+# docker-compose
+docker-compose is the manifest for your Dockerfile hence it stores the manifestation. Before going into details about building the Dockerfile with docker-compose, 
+pay attention to this block:
+
+`networks:
+  default:
+    external:
+      name: develop`
+
+Network is of type external and its name is develop. So the external docker network should exist before creating the docker-compose. If you haven't created one before, with this command you can create it.
+
+`docker network create develop`
