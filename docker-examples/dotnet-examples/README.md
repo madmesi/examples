@@ -77,3 +77,8 @@ How to unpase? `docker-compose unpause`
 - Another option is when you need to pull the images ( not in this case where you're building the Dockerfile, in a case where the Dockerimage option is specified.) before running the containers, you can use the `pull` option.
 
 `docker-compose pull`
+
+Basic operations:
+- `docker-compose start`
+- `docker-compose stop`
+- `docker-compose down` <-- this is destructive command, it stops the containers, and removes them.
