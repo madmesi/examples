@@ -27,3 +27,39 @@ pay attention to this block:
 Network is of type external and its name is develop. So the external docker network should exist before creating the docker-compose. If you haven't created one before, with this command you can create it.
 
 `docker network create develop`
+
+
+Second point:
+
+`services:
+  myapp-develop:
+    build:
+      context: .
+      dockerfile: Dockerfile`
+      
+The above block builds up your Dockerfile. In the previous step you created the Dockerfile, pay attention that the Dockerfile doesn't exist in any registry, so that's why you create it from scratch, from your code base. 
+This `context: . ` means that Dockerfile exists here (wherever the docker-compose exists in a filesystem, the Dockerfile exists there too)
+
+
+Other points:
+existing commands to a docker-compose file which might come in handy:
+
+- `docker-compose ps `
+Shows the running containers (if they are up)
+You can also specify which docker-compose file you mean:
+
+`docker-compose -f docker-compose-develop.yml ps `
+
+
+- `docker-compose config`
+
+when you run docker-compose config, it reads the docker-compose.yml in the current directory and checks for any syntactical errors. If found, shows the error with the line number to help you debug.
+
+
+- another command is 
+
+`docker-compose pause 
+
+
+- `docker-compose up -d` 
+launches the containers for all applications defined inside the service section. It does that in the detached mode provided using option `-d`, which is similar to the docker run option. Try running `docker-compose up` without this option to see what happens.
