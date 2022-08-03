@@ -1,0 +1,21 @@
+# great help from : https://faun.pub/managing-mongodb-on-docker-with-docker-compose-26bf8a0bbae3
+# use version 4.4.6 dockerimage since latest mongo has some CPU dependency architecture
+version: '3'
+services:
+  mongodb:
+    image: 'mongo:4.4.6'
+    restart: always
+    container_name: mongodb_hastim
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=testdb
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    ports:
+      - 27017:27017
+networks:
+  default:
+    external:
+      name: develop
